@@ -16,6 +16,7 @@ lxml
 megasdkrestclient
 pillow
 psutil
+psycopg2
 pybase64
 pymongo
 pyrogram
