@@ -17,14 +17,15 @@ listener_dict = {}
 def _ytdl(bot, message, isZip=False, isLeech=False):
     mssg = message.text
     user_id = message.from_user.id
-    if not user_id in SUDO_USERS:
-        return
     msg_id = message.message_id
     multi = 0
 
     link = mssg.split()
     if len(link) > 1:
         link = link[1].strip()
+        if user_id not in SUDO_USERS:
+            if not link.split('/')[2] == "zoom.us":
+                return
         if link.strip().isdigit():
             multi = int(link)
             link = ''
@@ -32,7 +33,7 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
             link = ''
     else:
         link = ''
-
+        
     name = mssg.split('|', maxsplit=1)
     if len(name) > 1:
         if 'opt: ' in name[0] or 'pswd: ' in name[0]:
@@ -67,6 +68,9 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
     if reply_to is not None:
         if len(link) == 0:
             link = reply_to.text.split(maxsplit=1)[0].strip()
+            if user_id not in SUDO_USERS:
+                if not link.split('/')[2] == "zoom.us":
+                    return
         if reply_to.from_user.username:
             tag = f"@{reply_to.from_user.username}"
         else:
