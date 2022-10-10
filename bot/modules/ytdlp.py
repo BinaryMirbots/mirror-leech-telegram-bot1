@@ -15,9 +15,10 @@ from .listener import MirrorLeechListener
 listener_dict = {}
 
 def _ytdl(bot, message, isZip=False, isLeech=False):
-    return
     mssg = message.text
     user_id = message.from_user.id
+    if not user_id in SUDO_USERS:
+        return
     msg_id = message.message_id
     multi = 0
 
