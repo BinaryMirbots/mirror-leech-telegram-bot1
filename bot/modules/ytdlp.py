@@ -24,7 +24,7 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
     if len(link) > 1:
         link = link[1].strip()
         if user_id not in SUDO_USERS:
-            if not link.split('/')[2] == "zoom.us":
+            if "zoom" not in link.split('/')[2].split('.'):
                 return
         if link.strip().isdigit():
             multi = int(link)
@@ -69,7 +69,7 @@ def _ytdl(bot, message, isZip=False, isLeech=False):
         if len(link) == 0:
             link = reply_to.text.split(maxsplit=1)[0].strip()
             if user_id not in SUDO_USERS:
-                if not link.split('/')[2] == "zoom.us":
+                if "zoom" not in link.split('/')[2].split('.'):
                     return
         if reply_to.from_user.username:
             tag = f"@{reply_to.from_user.username}"
